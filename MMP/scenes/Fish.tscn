@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctonwnldkdwhi"]
+
+[ext_resource type="Texture2D" uid="uid://dpr7iwwyodlq0" path="res://assets/EnemyIdle.png" id="1_xt1r1"]
+[ext_resource type="Script" path="res://scripts/Fish.gd" id="3_m4ndd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8i26"]
+atlas = ExtResource("1_xt1r1")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oomhx"]
+atlas = ExtResource("1_xt1r1")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4dg2"]
+atlas = ExtResource("1_xt1r1")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_alqyc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8i26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oomhx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4dg2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwptr"]
+size = Vector2(46, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7446"]
+size = Vector2(53, 19)
+
+[node name="SmallFish" type="CharacterBody2D"]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_alqyc")
+autoplay = "default"
+frame_progress = 0.883283
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -11.5)
+shape = SubResource("RectangleShape2D_dwptr")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("3_m4ndd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(3.5, -9.5)
+shape = SubResource("RectangleShape2D_m7446")
+debug_color = Color(0.996078, 0, 0.168627, 0.105882)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

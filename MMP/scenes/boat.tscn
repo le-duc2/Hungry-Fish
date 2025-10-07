@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://c21o7cjbomfyf"]
+
+[ext_resource type="Texture2D" uid="uid://6nj1s7bkxdaf" path="res://assets/Boat.png" id="1_8ay35"]
+[ext_resource type="Script" path="res://scripts/BoatScript.gd" id="1_eyfix"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ydsxk"]
+size = Vector2(124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxibn"]
+atlas = ExtResource("1_8ay35")
+region = Rect2(0, 0, 200, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qqeq"]
+atlas = ExtResource("1_8ay35")
+region = Rect2(200, 0, 200, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5xbl"]
+atlas = ExtResource("1_8ay35")
+region = Rect2(400, 0, 200, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_diiof"]
+atlas = ExtResource("1_8ay35")
+region = Rect2(600, 0, 200, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulgn4"]
+atlas = ExtResource("1_8ay35")
+region = Rect2(800, 0, 200, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bipqm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxibn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qqeq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5xbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_diiof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulgn4")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]
+
+[node name="Boat" type="CharacterBody2D"]
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("1_eyfix")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -16.5)
+shape = SubResource("RectangleShape2D_ydsxk")
+
+[node name="CollisionHitbox" type="CollisionPolygon2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+show_behind_parent = true
+polygon = PackedVector2Array(-72, -26, -72, -20, -50, 2, -36, 6, 24, 6, 40, 2, 72, -18, 72, -26)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bipqm")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.728129
